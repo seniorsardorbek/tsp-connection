@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "telegraf": "^4.15.3"
+  },
+  "scripts": {
+    "start": "nodemon server.js"
+  }
+}

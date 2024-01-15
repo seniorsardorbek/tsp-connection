@@ -2,12 +2,13 @@
 
 const net = require('net');
 const sendMessage = require('./telegraf');
+const stringToAscii =  require('./utils')
 const { Telegraf } = require('telegraf');
 const bot = new Telegraf('5689440902:AAEGRJsfpmmvmvokyYBRBWBhzRaYJ3UaPhE');
 bot.start((ctx) => {
     ctx.reply('Welcome TCP connection');
 });
-const targetChatId = '1424297977';
+const targetChatId = '2081782581';
 const server = net.createServer((socket) => {
     const clientIpAddress = socket.remoteAddress;
 
@@ -17,20 +18,19 @@ const server = net.createServer((socket) => {
         sendMessage(targetChatId, 'TCP client disconnected', bot.token);
     });
     socket.on('data', (data) => {
-        sendMessage(targetChatId, `message:${data.toString()} ip:${clientIpAddress}`, bot.token);
+        sendMessage(targetChatId, `message:${data} ip:${clientIpAddress}`, bot.token);
     });
     bot.on('text', (ctx) => {
-        const textFromUser = ctx.message.text;
+        const textFromUser = ctx.message.text
         server.getConnections((err, count) => {
             if (count > 0) {
-                socket.write(`${textFromUser}`);
+                socket.write(textFromUser );
             } else {
                 ctx.reply('No active TCP connections');
             }
         });
     });
 });
-
 bot.launch();
 
 process.once('SIGINT', () => bot.stop('SIGINT'));

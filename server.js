@@ -4,11 +4,11 @@ const net = require('net');
 const sendMessage = require('./telegraf');
 const stringToAscii =  require('./utils')
 const { Telegraf } = require('telegraf');
-const bot = new Telegraf('5689440902:AAEGRJsfpmmvmvokyYBRBWBhzRaYJ3UaPhE');
+const bot = new Telegraf('6893136193:AAGYp05JQE2TVZn-S2XbJpzYnjBebAC2TxE');
 bot.start((ctx) => {
     ctx.reply('Welcome TCP connection');
 });
-const targetChatId = '2081782581';
+const targetChatId = '1424297977';
 const server = net.createServer((socket) => {
     const clientIpAddress = socket.remoteAddress;
 

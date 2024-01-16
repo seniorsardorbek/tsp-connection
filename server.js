@@ -18,7 +18,8 @@ const server = net.createServer((socket) => {
         sendMessage(targetChatId, 'TCP client disconnected', bot.token);
     });
     socket.on('data', (data) => {
-        sendMessage(targetChatId, data, bot.token);
+        const message =  data.toString()
+        sendMessage(targetChatId, `msg:${message} , ip: ${clientIpAddress}`, bot.token);
     });
     bot.on('text', (ctx) => {
         const textFromUser = ctx.message.text
